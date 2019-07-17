@@ -73,4 +73,5 @@ public class LegalCaseRepositoryTest {
         Assertions.assertSame(123L, result.getTime());
 
     }
+
 }
