@@ -2,25 +2,30 @@ package com.tw.apistackbase.entity;
 
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+
 @Entity
+@Valid
+@Table(name="legalcase")
 public class LegalCase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", columnDefinition = "long")
     private Long id;
+
 
     @NotNull
     @Length(max=255)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull
+    @Column(name = "time", nullable = false)
     private Long time;
 
     public LegalCase(@NotNull @Length(max = 255) String name, @NotNull Long time) {
