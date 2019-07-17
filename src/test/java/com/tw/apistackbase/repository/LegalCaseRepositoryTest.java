@@ -2,6 +2,7 @@ package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.entity.LegalCase;
 import com.tw.apistackbase.entity.LegalCaseMessage;
+import com.tw.apistackbase.entity.Procuratorate;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.Executable;
@@ -90,7 +91,7 @@ public class LegalCaseRepositoryTest {
 
     @Test
     @DirtiesContext
-    public void should_return_not_null_when_add_message() {
+    public void should_return_legalCassMessage_when_add_message() {
         LegalCase legalCase = new LegalCase("test1", 12L);
         LegalCase legalCaseTwo = new LegalCase("test2", 13L);
         legalCaseRepository.saveAndFlush(legalCase);
@@ -119,4 +120,6 @@ public class LegalCaseRepositoryTest {
         });
 
     }
+
+
 }

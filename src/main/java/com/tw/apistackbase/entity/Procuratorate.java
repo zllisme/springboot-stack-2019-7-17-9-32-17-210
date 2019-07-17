@@ -21,4 +21,12 @@ public class Procuratorate {
 
     public Procuratorate() {
     }
+
+    @Override
+    public String toString() {
+        return "Procuratorate{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
