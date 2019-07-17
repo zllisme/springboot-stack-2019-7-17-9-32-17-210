@@ -28,6 +28,17 @@ public class LegalCase {
     @Column(name = "time", nullable = false)
     private Long time;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private LegalCaseMessage legalCaseMessage;
+
+    public LegalCaseMessage getLegalCaseMessage() {
+        return legalCaseMessage;
+    }
+
+    public void setLegalCaseMessage(LegalCaseMessage legalCaseMessage) {
+        this.legalCaseMessage = legalCaseMessage;
+    }
+
     public LegalCase(@NotNull @Length(max = 255) String name, @NotNull Long time) {
         this.name = name;
         this.time = time;

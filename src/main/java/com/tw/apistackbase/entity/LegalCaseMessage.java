@@ -1,5 +1,7 @@
 package com.tw.apistackbase.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 
@@ -11,22 +13,41 @@ public class LegalCaseMessage {
     @Column(name = "id", columnDefinition = "long")
     private Long id;
 
-    @Max(255)
-    @Column(name = "objective", nullable = false)
-    private String objective;
+    @Length(max=255,min=0)
+    @Column(name = "objectivedesc", nullable = false)
+    private String objectiveDesc;
 
-    @Max(255)
-    @Column(name = "subjective", nullable = false)
-    private String subjective;
+    @Length(max=255,min=0)
+    @Column(name = "subjectivedesc", nullable = false)
+    private String subjectiveDesc;
 
-    public LegalCaseMessage(Long id, @Max(255) String objective, @Max(255) String subjective) {
+    public LegalCaseMessage(Long id, @Max(255) String objectiveDesc, @Max(255) String subjectiveDesc) {
         this.id = id;
-        this.objective = objective;
-        this.subjective = subjective;
+        this.objectiveDesc = objectiveDesc;
+        this.subjectiveDesc = subjectiveDesc;
     }
 
-    public LegalCaseMessage(@Max(255) String objective, @Max(255) String subjective) {
-        this.objective = objective;
-        this.subjective = subjective;
+    public LegalCaseMessage(@Max(255) String objectiveDesc, @Max(255) String subjectiveDesc) {
+        this.objectiveDesc = objectiveDesc;
+        this.subjectiveDesc = subjectiveDesc;
+    }
+
+    public LegalCaseMessage() {
+    }
+
+    public String getObjectiveDesc() {
+        return objectiveDesc;
+    }
+
+    public void setObjectiveDesc(String objectiveDesc) {
+        this.objectiveDesc = objectiveDesc;
+    }
+
+    public String getSubjectiveDesc() {
+        return subjectiveDesc;
+    }
+
+    public void setSubjectiveDesc(String subjectiveDesc) {
+        this.subjectiveDesc = subjectiveDesc;
     }
 }

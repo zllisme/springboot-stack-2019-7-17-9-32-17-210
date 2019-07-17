@@ -1,6 +1,7 @@
 package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.entity.LegalCase;
+import com.tw.apistackbase.entity.LegalCaseMessage;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.Executable;
@@ -74,4 +75,14 @@ public class LegalCaseRepositoryTest {
 
     }
 
+    @Test
+    public void should_return_relevant_message() {
+        LegalCaseMessage legalCaseMessage = new LegalCaseMessage(1L,"objectiveDesc", "subjective desc");
+        LegalCase legalCase = new LegalCase(1L,"test", 123L);
+        legalCase.setLegalCaseMessage(legalCaseMessage);
+        legalCaseRepository.saveAndFlush(legalCase).getId();
+        LegalCase result = legalCaseRepository.findLegalCaseByName("test");
+        Assertions.assertEquals("subjective desc", result.getLegalCaseMessage().getSubjectiveDesc());
+        Assertions.assertSame("objectiveDesc", result.getLegalCaseMessage().getObjectiveDesc());
+    }
 }
