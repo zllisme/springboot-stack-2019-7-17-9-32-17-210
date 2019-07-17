@@ -50,4 +50,13 @@ public class LegalCaseMessage {
     public void setSubjectiveDesc(String subjectiveDesc) {
         this.subjectiveDesc = subjectiveDesc;
     }
+
+    @Override
+    public String toString() {
+        return "LegalCaseMessage{" +
+                "id=" + id +
+                ", objectiveDesc='" + objectiveDesc + '\'' +
+                ", subjectiveDesc='" + subjectiveDesc + '\'' +
+                '}';
+    }
 }

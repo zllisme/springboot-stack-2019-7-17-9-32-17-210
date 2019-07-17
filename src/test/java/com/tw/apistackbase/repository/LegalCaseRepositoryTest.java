@@ -15,6 +15,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.ListIterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -76,6 +77,7 @@ public class LegalCaseRepositoryTest {
     }
 
     @Test
+    @DirtiesContext
     public void should_return_relevant_message() {
         LegalCaseMessage legalCaseMessage = new LegalCaseMessage(1L,"objectiveDesc", "subjective desc");
         LegalCase legalCase = new LegalCase(1L,"test", 123L);
@@ -84,5 +86,28 @@ public class LegalCaseRepositoryTest {
         LegalCase result = legalCaseRepository.findLegalCaseByName("test");
         Assertions.assertEquals("subjective desc", result.getLegalCaseMessage().getSubjectiveDesc());
         Assertions.assertSame("objectiveDesc", result.getLegalCaseMessage().getObjectiveDesc());
+    }
+
+    @Test
+    @DirtiesContext
+    public void should_return_not_null_when_add_message() {
+        LegalCase legalCase = new LegalCase("test1", 12L);
+        LegalCase legalCaseTwo = new LegalCase("test2", 13L);
+        legalCaseRepository.saveAndFlush(legalCase);
+        legalCaseRepository.saveAndFlush(legalCaseTwo);
+        List<LegalCase> legalCases = legalCaseRepository.findAll();
+        LegalCaseMessage legalCaseMessage = new LegalCaseMessage("objectiveDesc", "subjective desc");
+        LegalCaseMessage legalCaseMessage2 = new LegalCaseMessage("test", "sub test");
+        legalCases.get(0).setLegalCaseMessage(legalCaseMessage);
+        legalCases.get(1).setLegalCaseMessage(legalCaseMessage2);
+
+        List<LegalCase> result = legalCaseRepository.findAll();
+
+        Assertions.assertEquals(legalCaseMessage.toString(), result.get(0).getLegalCaseMessage().toString());
+        Assertions.assertEquals(legalCaseMessage2.toString(), result.get(1).getLegalCaseMessage().toString());
+
+
+
+
     }
 }
