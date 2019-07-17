@@ -33,6 +33,12 @@ public class LegalCase {
         this.time = time;
     }
 
+    public LegalCase(Long id, @NotNull @Length(max = 255) String name, Long time) {
+        this.id = id;
+        this.name = name;
+        this.time = time;
+    }
+
     public LegalCase() {
     }
 

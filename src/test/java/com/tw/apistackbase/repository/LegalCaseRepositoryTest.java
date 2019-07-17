@@ -43,6 +43,7 @@ public class LegalCaseRepositoryTest {
     }
 
     @Test
+    @DirtiesContext
     public void should_fail_when_save() {
         LegalCase legalCase = new LegalCase("test", null);
         LegalCase legalCaseTwo = new LegalCase(null, 100L);
@@ -58,6 +59,18 @@ public class LegalCaseRepositoryTest {
                 legalCaseRepository.saveAndFlush(legalCaseTwo);
             }
         });
+
+    }
+
+    @Test
+    @DirtiesContext
+    public void should_return_legal_case_when_find_by_name() {
+        LegalCase legalCase = new LegalCase(1L,"test", 123L);
+        legalCaseRepository.saveAndFlush(legalCase);
+        LegalCase result = legalCaseRepository.findLegalCaseByName("test");
+        Assertions.assertSame(1L, result.getId());
+        Assertions.assertEquals("test", result.getName());
+        Assertions.assertSame(123L, result.getTime());
 
     }
 }
