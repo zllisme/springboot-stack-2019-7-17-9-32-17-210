@@ -31,12 +31,24 @@ public class LegalCase {
     @OneToOne(cascade = CascadeType.ALL)
     private LegalCaseMessage legalCaseMessage;
 
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    private Procuratorate procuratorate;
+
     public LegalCaseMessage getLegalCaseMessage() {
         return legalCaseMessage;
     }
 
     public void setLegalCaseMessage(LegalCaseMessage legalCaseMessage) {
         this.legalCaseMessage = legalCaseMessage;
+    }
+
+    public Procuratorate getProcuratorate() {
+        return procuratorate;
+    }
+
+    public void setProcuratorate(Procuratorate procuratorate) {
+        this.procuratorate = procuratorate;
     }
 
     public LegalCase(@NotNull @Length(max = 255) String name, @NotNull Long time) {

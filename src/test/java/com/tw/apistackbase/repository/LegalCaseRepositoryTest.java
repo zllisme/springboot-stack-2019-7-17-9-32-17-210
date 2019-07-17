@@ -105,9 +105,18 @@ public class LegalCaseRepositoryTest {
 
         Assertions.assertEquals(legalCaseMessage.toString(), result.get(0).getLegalCaseMessage().toString());
         Assertions.assertEquals(legalCaseMessage2.toString(), result.get(1).getLegalCaseMessage().toString());
+    }
 
-
-
+    @Test
+    @DirtiesContext
+    public void should_fail_when_procuratorate_is_null() {
+        LegalCase legalCase = new LegalCase("test", 100L);
+        assertThrows(Exception.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                legalCaseRepository.saveAndFlush(legalCase);
+            }
+        });
 
     }
 }
